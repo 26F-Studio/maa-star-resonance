@@ -10,9 +10,9 @@
     "lint": "eslint -c ./eslint.config.js \"./src*/**/*.{ts,js,cjs,mjs,vue}\"",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
-    "dev": "quasar dev",
-    "build": "quasar build",
-    "postinstall": "quasar prepare"
+    "dev": "chcp 65001 && quasar dev -m electron",
+    "build": "quasar build -m electron",
+    "publish": "quasar build -m electron --publish"
   },
   "dependencies": {
     "@maaxyz/maa-node": "^4.4.1",

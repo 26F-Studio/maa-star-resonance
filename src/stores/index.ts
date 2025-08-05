@@ -1,5 +1,8 @@
 import { defineStore } from '#q-app/wrappers';
 import { createPinia } from 'pinia';
+import { createPersistedState } from 'pinia-plugin-persistedstate';
+
+import packageJson from 'app/package.json';
 
 /*
  * When adding new properties to stores, you should also
@@ -24,9 +27,11 @@ declare module 'pinia' {
 
 export default defineStore((/* { ssrContext } */) => {
   const pinia = createPinia();
-
-  // You can add Pinia plugins here
-  // pinia.use(SomePiniaPlugin)
-
+  pinia.use(
+    createPersistedState({
+      auto: true,
+      key: (id) => `${packageJson.name}.${id}`,
+    }),
+  );
   return pinia;
 });
