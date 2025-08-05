@@ -1,4 +1,5 @@
 import { Container } from 'inversify';
+import 'reflect-metadata';
 
 import { AppService } from 'app/src-electron/service/app';
 import { GameService } from 'app/src-electron/service/game';
