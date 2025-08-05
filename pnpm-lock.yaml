@@ -35,6 +35,9 @@ importers:
       quasar:
         specifier: ^2.18.2
         version: 2.18.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
       vue:
         specifier: ^3.5.18
         version: 3.5.18(typescript@5.5.4)

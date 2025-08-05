@@ -20,6 +20,8 @@ export class MaaService implements MaaServiceTrait {
     @inject(ServiceType.game)
     private _gameService: GameService,
   ) {
+    Global.log_dir = LOG_PATH;
+    Global.stdout_level = 'Off';
     this._resource.notify = (message, details) => {
       log.info(message, details);
     };
@@ -148,8 +150,6 @@ export class MaaService implements MaaServiceTrait {
   }
 
   async create() {
-    Global.log_dir = LOG_PATH;
-    Global.stdout_level = 'Off';
     // Global.show_hit_draw = true;
     this._gameService.registerToResource(this._resource);
     return await this._resource.post_bundle(RESOURCES_PATH).wait().succeeded;
