@@ -10,8 +10,8 @@ export const EMPTY_RECT: api.Rect = {
 };
 
 export const LOG_PATH = process.env.PROD
-  ? `"${join(process.resourcesPath, 'log')}"` // Production log path
-  : resolve(fileURLToPath(new URL('.', import.meta.url)), '../..'); // Development log path
+  ? 'logs'
+  : resolve(fileURLToPath(new URL('.', import.meta.url)), '../..');
 
 export const RESOURCES_PATH = process.env.PROD
   ? `"${join(process.resourcesPath, 'maa-resources')}"`

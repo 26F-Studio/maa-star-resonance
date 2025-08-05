@@ -186,18 +186,6 @@ export default defineConfig((ctx) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-electron-apps/configuring-electron
     electron: {
-      // Configure main process build
-      // extendElectronMainConf(esbuildConf) {
-      //   esbuildConf.external = esbuildConf.external || [];
-      //   esbuildConf.external.push('@maaxyz/maa-node');
-      // },
-
-      // Configure preload script build
-      // extendElectronPreloadConf(esbuildConf) {
-      //   esbuildConf.external = esbuildConf.external || [];
-      //   esbuildConf.external.push('@maaxyz/maa-node');
-      // },
-
       // Electron preload scripts (if any) from /src-electron, WITHOUT file extension
       preloadScripts: ['electron-preload'],
 
@@ -219,7 +207,6 @@ export default defineConfig((ctx) => {
 
       builder: {
         appId: 'org.studio26f.maa-star-resonance',
-        asar: false,
         win: {
           icon: 'assets/icons/icon.ico',
           publish: [
@@ -235,14 +222,6 @@ export default defineConfig((ctx) => {
             },
           ],
           extraResources: [
-            {
-              from: 'node_modules/@maaxyz/maa-node',
-              to: 'node_modules/@maaxyz/maa-node',
-            },
-            {
-              from: 'node_modules/@maaxyz/maa-node-win32-x64',
-              to: 'node_modules/@maaxyz/maa-node-win32-x64',
-            },
             {
               from: 'src-electron/assets/maa-resources',
               to: 'maa-resources',
