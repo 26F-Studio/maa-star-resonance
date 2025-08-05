@@ -9,7 +9,7 @@ export const clickByFlatRect = async (
   return await runCustomAction(context, {
     GameServiceClick: {
       action: 'Click',
-      target: flatRect
+      target: flatRect,
     },
   });
 };

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { bus } from 'boot/bus';
 import ThemeButton from 'components/ThemeButton.vue';
@@ -8,9 +9,10 @@ import { WindowType } from 'src/types/service/window/types';
 import { i18nSubPath, useService } from 'src/utils/common';
 
 const i18n = i18nSubPath('layouts.headers.MainHeader');
+const {name} = useRoute();
 const windowService = useService(ServiceType.window);
 
-const isFixed = ref(false);
+const isAlwaysOnTop = ref(false);
 
 const close = async () => {
   // TODO: Show confirmation dialog before closing
@@ -22,7 +24,7 @@ const minimize = async () => {
 };
 
 const toggleAlwaysOnTop = async () => {
-  isFixed.value = !isFixed.value;
+  isAlwaysOnTop.value = !isAlwaysOnTop.value;
   await windowService.toggleAlwaysOnTopWindow(WindowType.main);
 };
 
@@ -35,16 +37,16 @@ const toggleMaximize = async () => {
   <q-header bordered class="bg-primary text-white">
     <q-bar v-if="$q.platform.is.electron" class="q-electron-drag q-pr-none">
       <q-img src="logos/light/logo.svg" width="1.5rem" />
-      <div>{{ i18n('labels.title') }}</div>
+      <div>{{ i18n(`labels.title`) }}</div>
       <q-space />
       <q-btn
         flat
-        :icon="isFixed ? 'mdi-pin' : 'mdi-pin-off'"
+        :icon="isAlwaysOnTop ? 'mdi-pin-off' : 'mdi-pin'"
         stretch
         @click="() => toggleAlwaysOnTop()"
       >
         <q-tooltip :delay="1000">
-          {{ isFixed ? i18n('tooltips.setAlwaysOnTop') : i18n('tooltips.unsetAlwaysOnTop') }}
+          {{ isAlwaysOnTop ? i18n('tooltips.unsetAlwaysOnTop') : i18n('tooltips.setAlwaysOnTop') }}
         </q-tooltip>
       </q-btn>
 
@@ -67,7 +69,7 @@ const toggleMaximize = async () => {
     <q-toolbar>
       <q-btn dense flat icon="menu" round @click="bus.emit('drawer', 'toggle', 'left')" />
       <q-toolbar-title>
-        {{ i18n('labels.title') }}
+        {{ i18n(`routes.${String(name)}`) }}
       </q-toolbar-title>
       <theme-button />
       <q-btn dense flat icon="menu" round @click="bus.emit('drawer', 'toggle', 'right')" />

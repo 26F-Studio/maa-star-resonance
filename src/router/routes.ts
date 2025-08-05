@@ -10,13 +10,15 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        redirect: `${WINDOW_URL_MAPPING[WindowType.main]}/home`,
+        redirect: `${WINDOW_URL_MAPPING[WindowType.main]}/workflow`,
       },
       {
-        path: 'home',
+        name: 'workflow',
+        path: 'workflow',
         components: {
-          default: () => import('pages/HomePage.vue'),
+          default: () => import('pages/WorkflowPage.vue'),
           leftDrawer: () => import('layouts/drawers/LeftMainDrawer.vue'),
+          rightDrawer: () => import('layouts/drawers/RightMainDrawer.vue'),
           header: () => import('layouts/headers/MainHeader.vue'),
         },
       },

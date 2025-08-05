@@ -55,6 +55,7 @@ export class AppService implements AppServiceTrait {
       app.focus();
       this._windowService.getWindow(WindowType.main).show();
     });
+    app.on('window-all-closed', () => {});
     app.whenReady().then(
       async () => {
         await this._maaService.create();

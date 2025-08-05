@@ -42,9 +42,13 @@ export abstract class BaseWindow {
       }
     });
     if (process.env.DEV) {
-      this._window.loadURL(`${process.env.APP_URL}#${this._hash}`).catch((e) => log.warn('loadURL', e));
+      this._window
+        .loadURL(`${process.env.APP_URL}#${this._hash}`)
+        .catch((e) => log.warn('loadURL', e));
     } else {
-      this._window.loadFile('index.html', { hash: this._hash }).catch((e) => log.warn('loadFile', e));
+      this._window
+        .loadFile('index.html', { hash: this._hash })
+        .catch((e) => log.warn('loadFile', e));
     }
 
     return this._window;

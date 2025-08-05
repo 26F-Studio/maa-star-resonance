@@ -18,10 +18,10 @@ const i18n = (relativePath: string) => {
 
 const navigations: Navigation[] = [
   {
-    label: 'home',
-    icon: 'home',
+    label: 'workflow',
+    icon: 'mdi-graph',
     available: true,
-    route: 'home',
+    route: 'workflow',
   },
 ];
 </script>

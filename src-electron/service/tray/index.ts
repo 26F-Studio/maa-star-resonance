@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron';
+import { app, Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'path';
 
@@ -50,6 +50,11 @@ export class TrayService implements TrayServiceTrait {
       ]),
     );
     this._tray.setToolTip(`${packageJson.productName} v${packageJson.version}`);
+    this.registerMenuEntry(MenuEntry.Quit, () => app.quit());
+  }
+
+  registerMenuEntry(entry: MenuEntry, callback: () => void) {
+    this._menuEntryMap.set(entry, callback);
   }
 
   private _createNormalItem(menuEntry: MenuEntry, label: string): MenuItemConstructorOptions {

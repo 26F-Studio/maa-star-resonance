@@ -3,6 +3,7 @@ export default {
     AdbDeviceCard: {
       labels: {
         title: 'Available Devices',
+        refreshDevices: 'Refresh Devices',
         disconnect: 'Disconnect',
       },
       notifications: {
@@ -61,7 +62,7 @@ export default {
     drawers: {
       LeftMainDrawer: {
         labels: {
-          home: 'Home',
+          workflow: 'Workflow',
         },
       },
     },
@@ -69,6 +70,9 @@ export default {
       MainHeader: {
         labels: {
           title: 'MAA Star Resonance',
+        },
+        routes: {
+          workflow: 'Workflow',
         },
         tooltips: {
           setAlwaysOnTop: 'Set Always on Top',
@@ -81,9 +85,8 @@ export default {
     },
   },
   pages: {
-    HomePage: {
+    WorkflowPage: {
       labels: {
-        title: 'Home',
       },
     },
   },

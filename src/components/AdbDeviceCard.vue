@@ -80,19 +80,30 @@ const disconnect = async () => {
   return isSuccess;
 };
 
-onMounted(async () => {
+const refreshDevices = async () => {
+  isProcessing.value = true;
   try {
     adbDevices.value = await maaService.listDevices();
   } catch (error) {
-    console.error('Failed to fetch ADB devices:', error);
+    console.error('Failed to refresh ADB devices:', error);
+    notify({
+      type: 'negative',
+      message: i18n('notifications.refreshError'),
+    });
+  } finally {
+    isProcessing.value = false;
   }
+};
+
+onMounted(async () => {
+  await refreshDevices();
 });
 </script>
 
 <template>
   <q-card bordered flat class="column">
     <q-card-section>
-      <div class="text-weight-medium q-mx-lg">
+      <div class="text-weight-medium q-mx-md">
         {{ i18n('labels.title') }}
       </div>
     </q-card-section>
@@ -127,11 +138,19 @@ onMounted(async () => {
     <q-separator />
     <q-card-actions align="center">
       <q-btn
+        v-if="connectedDevice"
         color="negative"
-        :disable="!connectedDevice"
         :label="i18n('labels.disconnect')"
         no-caps
         @click="disconnect"
+      />
+      <q-btn
+        v-else
+        color="primary"
+        :label="i18n('labels.refreshDevices')"
+        :loading="isProcessing"
+        no-caps
+        @click="refreshDevices"
       />
     </q-card-actions>
     <q-inner-loading :showing="isProcessing">

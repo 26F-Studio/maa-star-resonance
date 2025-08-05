@@ -15,7 +15,7 @@ export const AUTO_FISHING: Workflow = {
     {
       name: 'checkAccessories',
       icon: 'checklist',
-      data: CHECK_ACCESSORIES
+      data: CHECK_ACCESSORIES,
     },
     {
       name: 'autoCastingAndLanding',
