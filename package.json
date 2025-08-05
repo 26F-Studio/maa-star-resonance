@@ -37,7 +37,7 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "autoprefixer": "^10.4.21",
-    "electron": "^37.2.5",
+    "electron": "37.2.5",
     "electron-builder": "^26.0.12",
     "eslint": "^9.32.0",
     "eslint-plugin-vue": "^9.33.0",
