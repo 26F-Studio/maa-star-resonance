@@ -36,6 +36,7 @@ export class AppService implements AppServiceTrait {
         ...data,
       ];
     });
+    log.info('AppService init');
     this._initApplication();
     this._initIpc();
   }
@@ -48,7 +49,7 @@ export class AppService implements AppServiceTrait {
       exit(-1);
     }
     app.setLoginItemSettings({
-      openAtLogin: true,
+      openAtLogin: false,
     });
     app.on('second-instance', () => {
       app.focus();
