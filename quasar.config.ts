@@ -244,7 +244,7 @@ export default defineConfig((ctx) => {
         },
       },
 
-      unPackagedInstallParams: ['install', '--prod', '--no-frozen-lockfile'],
+      unPackagedInstallParams: ['install'],
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/developing-browser-extensions/configuring-bex
