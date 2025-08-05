@@ -1,6 +1,6 @@
 {
   "name": "maa-star-resonance",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A Star Resonance helper powered by Quasar and MAA frameworks",
   "productName": "MAA Star Resonance",
   "author": "ParticleG <particle_g@outlook.com>",
@@ -11,7 +11,6 @@
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "chcp 65001 && quasar dev -m electron",
-    "build": "quasar build -m electron",
     "publish": "quasar build -m electron --publish"
   },
   "dependencies": {
