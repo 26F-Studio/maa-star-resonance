@@ -18,7 +18,7 @@ export const CHECK_ACCESSORIES: Pipeline = {
   },
   clickUseBait: {
     next: ['clickAddRod'],
-    timeout: 1000,
+    timeout: 2000,
     recognition: 'OCR',
     roi: [548, 213, 151, 126],
     expected: '使用',
@@ -36,9 +36,9 @@ export const CHECK_ACCESSORIES: Pipeline = {
   },
   clickUseRod: {
     next: ['finishCheckAccessories'],
-    timeout: 1000,
+    timeout: 2000,
     recognition: 'OCR',
-    roi: [650, 214, 149, 125],
+    roi: [628, 199, 194, 160],
     expected: '使用',
     action: 'Click',
   },
