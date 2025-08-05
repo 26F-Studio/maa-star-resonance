@@ -1,15 +1,15 @@
 import { BrowserWindow } from 'electron';
-import Logger from 'electron-log';
 
 import { DEFAULT_CONSTRUCT_OPTIONS } from 'app/src-electron/service/window/base/constants';
 import type { ConstructOptions } from 'app/src-electron/service/window/base/types';
 
 import { WINDOW_URL_MAPPING } from 'src/types/service/window/constants';
 import type { WindowType } from 'src/types/service/window/types';
+import log from 'electron-log';
 
 export abstract class BaseWindow {
   private readonly _constructOptions: ConstructOptions;
-  private readonly _url: string;
+  private readonly _hash: string;
   protected _window?: BrowserWindow | undefined;
 
   protected constructor(windowType: WindowType, constructOptions?: ConstructOptions) {
@@ -17,7 +17,7 @@ export abstract class BaseWindow {
       ...DEFAULT_CONSTRUCT_OPTIONS,
       ...constructOptions,
     };
-    this._url = `${process.env.APP_URL}#${WINDOW_URL_MAPPING[windowType]}`;
+    this._hash = WINDOW_URL_MAPPING[windowType];
   }
 
   create() {
@@ -41,7 +41,11 @@ export abstract class BaseWindow {
         }
       }
     });
-    this._window.loadURL(this._url).catch((e) => Logger.warn('loadURL', e));
+    if (process.env.DEV) {
+      this._window.loadURL(`${process.env.APP_URL}#${this._hash}`).catch((e) => log.warn('loadURL', e));
+    } else {
+      this._window.loadFile('index.html', { hash: this._hash }).catch((e) => log.warn('loadFile', e));
+    }
 
     return this._window;
   }
