@@ -22,6 +22,7 @@ const props = withDefaults(
 );
 
 const isError = ref(false);
+const isInterrupted = ref(false);
 const isRunning = ref(false);
 const roundsFinished = ref(0);
 const roundsTotal = ref(1);
@@ -34,18 +35,28 @@ const runWorkflow = async () => {
     return;
   }
 
+  isInterrupted.value = false;
+  isRunning.value = true;
   for (
     roundsFinished.value = 0;
     roundsFinished.value < roundsTotal.value || roundsTotal.value <= 0;
     roundsFinished.value++
   ) {
     const workflowName = i18n(`workflows.${selectedWorkflow.value.name}.name`);
-
     isError.value = false;
-    isRunning.value = true;
     stepIndex.value = -1;
+
     for (const pipeline of selectedWorkflow.value.pipelines) {
       stepIndex.value++;
+      if (isInterrupted.value) {
+        stepIndex.value += 0.5;
+        isRunning.value = false;
+        notify({
+          type: 'info',
+          message: i18n('notifications.workflowInterrupted', { name: workflowName }),
+        });
+        return;
+      }
       try {
         isError.value = !(await maaService.runNewPipeline(toRaw(pipeline.data)));
       } catch (error) {
@@ -73,8 +84,12 @@ const runWorkflow = async () => {
       }),
     });
     stepIndex.value++;
-    isRunning.value = false;
+    if (isError.value) {
+      break;
+    }
   }
+  roundsFinished.value++;
+  isRunning.value = false;
 };
 
 const selectWorkflow = (pipeline: Workflow) => {
@@ -94,7 +109,7 @@ const selectWorkflow = (pipeline: Workflow) => {
       <template v-slot:before>
         <div class="column full-height">
           <q-card-section>
-            <div class="text-weight-medium">
+            <div class="text-weight-medium text-center">
               {{ i18n('labels.title') }}
             </div>
           </q-card-section>
@@ -140,7 +155,9 @@ const selectWorkflow = (pipeline: Workflow) => {
                 v-for="(pipeline, index) in selectedWorkflow.pipelines"
                 :key="index"
                 :done="stepIndex > index"
-                :error="isError && Math.floor(stepIndex) === index"
+                :error="(isError || isInterrupted) && Math.floor(stepIndex) === index"
+                :error-color="isError ? 'negative' : 'warning'"
+                :error-icon="isError ? 'error' : 'block'"
                 :icon="pipeline.icon ?? 'schema'"
                 :name="index"
                 :title="i18n(`pipelines.${pipeline.name}.name`)"
@@ -183,12 +200,20 @@ const selectWorkflow = (pipeline: Workflow) => {
               {{ i18n('labels.roundsFinished', { value: roundsFinished }) }}
             </div>
             <q-btn
+              v-if="!isRunning"
               color="primary"
               :disable="disabled || !selectedWorkflow"
-              :loading="isRunning"
               :label="i18n('labels.runWorkflow')"
               no-caps
               @click="runWorkflow"
+            />
+            <q-btn
+              v-else
+              color="negative"
+              :label="i18n('labels.stopWorkflow')"
+              :loading="isInterrupted"
+              no-caps
+              @click="isInterrupted = true"
             />
           </q-card-actions>
         </div>

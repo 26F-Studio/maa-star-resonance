@@ -22,6 +22,7 @@ export default {
         runIndefinitely: 'Run indefinitely',
         roundsFinished: 'Finished rounds: {value}',
         runWorkflow: 'Run workflow',
+        stopWorkflow: 'Stop workflow',
       },
       workflows: {
         autoFishing: {
@@ -46,6 +47,7 @@ export default {
       notifications: {
         pipelineError: 'Pipeline "{name}" threw an error',
         workflowFailure: 'Workflow "{name}" failed',
+        workflowInterrupted: 'Workflow "{name}" was interrupted',
         workflowSuccess: 'Workflow "{name}" completed successfully',
       },
     },
