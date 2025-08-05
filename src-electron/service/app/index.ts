@@ -57,7 +57,8 @@ export class AppService implements AppServiceTrait {
     app.whenReady().then(
       async () => {
         log.info(`Starting service ${ServiceType.maa}...`);
-        await this._maaService.create();
+        // await this._maaService.create();
+        await new Promise((resolve) => resolve(true));
         log.info(`Service ${ServiceType.maa} started`);
         log.info(`Starting service ${ServiceType.tray}...`);
         this._trayService.create();
