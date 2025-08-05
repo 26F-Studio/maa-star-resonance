@@ -211,12 +211,7 @@ export default defineConfig((ctx) => {
       },
 
       builder: {
-        // https://www.electron.build/configuration/configuration
-        appId: 'maa-star-resonance',
-        nsis: {
-          multiLanguageInstaller: true,
-          perMachine: true,
-        },
+        appId: 'org.studio26f.maa-star-resonance',
         win: {
           icon: 'assets/icons/icon.ico',
           publish: [
@@ -232,10 +227,6 @@ export default defineConfig((ctx) => {
             },
           ],
           extraResources: [
-            // {
-            //   from: 'node_modules/@maaxyz/maa-node-win32-x64',
-            //   to: 'maa-node',
-            // },
             {
               from: 'src-electron/assets/maa-resources',
               to: 'maa-resources',

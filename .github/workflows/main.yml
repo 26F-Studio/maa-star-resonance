@@ -1,0 +1,79 @@
+name: MAA Star Resonance Main CI
+
+permissions: write-all
+
+on:
+  push:
+    branches: [ ci-*, main ]
+    tags: [ pre*, v* ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  get-info:
+    runs-on: ubuntu-latest
+    outputs:
+      commitHash: ${{ steps.git-info.outputs.commitHash }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get git info
+        id: git-info
+        shell: bash
+        run: |
+          COMMIT_HASH=$(git rev-parse --short ${{ GITHUB.SHA }})
+          echo "commitHash=$COMMIT_HASH" >> $GITHUB_OUTPUT
+
+  build:
+    runs-on: windows-latest
+    needs: get-info
+    env:
+      OUTPUT_FOLDER: ./dist/electron/Packaged
+      RELEASE_FOLDER: ./release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Publish Electron package
+        run: pnpm run publish
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: maa-star-resonance_${{ needs.get-info.outputs.commitHash }}_${{ GITHUB.RUN_NUMBER }}_artifacts
+          path: |
+            ${{ env.OUTPUT_FOLDER }}/*.exe
+            ${{ env.OUTPUT_FOLDER }}/*.exe.blockmap
+            ${{ env.OUTPUT_FOLDER }}/release.yml
+      - name: Upload other files
+        uses: actions/upload-artifact@v4
+        with:
+          name: cmw-coder-quasar_${{ needs.get-info.outputs.commitHash }}_${{ GITHUB.RUN_NUMBER }}_debug
+          path: |
+            ${{ env.OUTPUT_FOLDER }}/generic/
+            ${{ env.OUTPUT_FOLDER }}/win-unpacked/
+            ${{ env.OUTPUT_FOLDER }}/builder-debug.yml
+            ${{ env.OUTPUT_FOLDER }}/builder-effective-config.yaml
+      - name: Prepare for release
+        if: ${{ startsWith(github.ref, 'refs/tags/pre') || startsWith(github.ref, 'refs/tags/v') }}
+        shell: bash
+        run: |
+          mkdir -p ${{ env.RELEASE_FOLDER }}
+          7z a -tzip ${{ env.RELEASE_FOLDER }}/maa-star-resonance.zip "${{ env.OUTPUT_FOLDER }}/*.exe" "${{ env.OUTPUT_FOLDER }}/*.exe.blockmap" "${{ env.OUTPUT_FOLDER }}/release.yml"
+      - name: Upload release
+        if: ${{ startsWith(github.ref, 'refs/tags/pre') || startsWith(github.ref, 'refs/tags/v') }}
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: |
+            ${{ env.RELEASE_FOLDER }}/maa-star-resonance.zip
+          prerelease: ${{ startsWith(github.ref, 'refs/tags/pre') }}
