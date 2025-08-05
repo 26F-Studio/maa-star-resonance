@@ -88,7 +88,6 @@ const runWorkflow = async () => {
       break;
     }
   }
-  roundsFinished.value++;
   isRunning.value = false;
 };
 

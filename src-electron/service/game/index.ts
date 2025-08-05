@@ -96,7 +96,7 @@ export class GameService implements GameServiceTrait {
       const bowDirection = await getBowDirection(self.context, screenshot);
       if (bowDirection) {
         const currentTime = Date.now();
-        if (!this._currentBowDirection && currentTime - this._lastBowDirectionChangeTime > 2500) {
+        if (!this._currentBowDirection && currentTime - this._lastBowDirectionChangeTime > 1000) {
           log.info(`Start bow direction: ${bowDirection}`);
           const startBowResult = await startBow(self.context, bowDirection);
           if (!startBowResult) {
@@ -108,7 +108,7 @@ export class GameService implements GameServiceTrait {
           this._lastBowDirectionChangeTime = currentTime;
         } else if (
           this._currentBowDirection !== bowDirection &&
-          currentTime - this._lastBowDirectionChangeTime > 2500
+          currentTime - this._lastBowDirectionChangeTime > 1000
         ) {
           log.info(`Bow direction changed: ${bowDirection}, cancel current bow action`);
           const stopBowResult = await stopBow(self.context);

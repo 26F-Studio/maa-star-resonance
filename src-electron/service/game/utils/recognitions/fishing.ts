@@ -23,7 +23,7 @@ export const getBowDirection = async (
     runCustomRecognition(context, image, {
       GameServiceCheckBowLeft: {
         recognition: 'TemplateMatch',
-        roi: [347, 254, 595, 211],
+        roi: [340, 320, 300, 80],
         template: 'bow_left.png',
         green_mask: true,
       },
@@ -31,7 +31,7 @@ export const getBowDirection = async (
     runCustomRecognition(context, image, {
       GameServiceCheckBowRight: {
         recognition: 'TemplateMatch',
-        roi: [347, 254, 595, 211],
+        roi: [640, 320, 300, 80],
         template: 'bow_right.png',
         green_mask: true,
       },

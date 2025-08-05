@@ -23,11 +23,9 @@ export const START_FISHING: Pipeline = {
     recognition: 'OCR',
     roi: [822, 277, 149, 135],
     expected: '钓鱼',
-    post_delay: 2000,
     action: 'Click',
   },
   checkCastingButton: {
-    next: [],
     recognition: 'TemplateMatch',
     roi: [1084, 514, 150, 143],
     template: 'casting_button.png',
