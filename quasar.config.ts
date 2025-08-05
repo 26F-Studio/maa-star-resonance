@@ -197,7 +197,7 @@ export default defineConfig((ctx) => {
       // specify the debugging port to use for the Electron app when running in development mode
       inspectPort: 5858,
 
-      bundler: 'packager', // 'packager' or 'builder'
+      bundler: 'builder', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
@@ -214,7 +214,8 @@ export default defineConfig((ctx) => {
         // https://www.electron.build/configuration/configuration
         appId: 'maa-star-resonance',
         nsis: {
-          oneClick: true
+          multiLanguageInstaller: true,
+          perMachine: true,
         },
         win: {
           icon: 'assets/icons/icon.ico',
@@ -231,10 +232,10 @@ export default defineConfig((ctx) => {
             },
           ],
           extraResources: [
-            {
-              from: 'node_modules/@maaxyz/maa-node-win32-x64',
-              to: 'maa-node',
-            },
+            // {
+            //   from: 'node_modules/@maaxyz/maa-node-win32-x64',
+            //   to: 'maa-node',
+            // },
             {
               from: 'src-electron/assets/maa-resources',
               to: 'maa-resources',
