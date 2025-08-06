@@ -21,6 +21,7 @@ export const AUTO_FISHING: Workflow = {
       name: 'autoCastingAndLanding',
       icon: 'phishing',
       data: AUTO_CASTING_AND_LANDING,
+      ignoreFailure: true,
     },
   ],
 };

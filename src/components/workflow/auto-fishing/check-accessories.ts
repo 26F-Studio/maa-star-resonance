@@ -27,6 +27,7 @@ export const CHECK_ACCESSORIES: Pipeline = {
   clickAddRod: {
     interrupt: ['finishCheckAccessories'],
     next: ['clickUseRod'],
+    post_delay: 500,
     timeout: 2000,
     recognition: 'TemplateMatch',
     roi: [232, 605, 65, 66],
@@ -38,9 +39,10 @@ export const CHECK_ACCESSORIES: Pipeline = {
     next: ['finishCheckAccessories'],
     timeout: 2000,
     recognition: 'OCR',
-    roi: [628, 199, 194, 160],
+    roi: [642, 207, 165, 138],
     expected: '使用',
     action: 'Click',
+    target: [727, 275, 1, 1],
   },
   finishCheckAccessories: {
     action: 'StopTask',

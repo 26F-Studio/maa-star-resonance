@@ -10,11 +10,11 @@ export const EMPTY_RECT: api.Rect = {
 };
 
 export const LOG_PATH = process.env.PROD
-  ? 'logs'
+  ? join(process.resourcesPath, 'logs')
   : resolve(fileURLToPath(new URL('.', import.meta.url)), '../..');
 
 export const RESOURCES_PATH = process.env.PROD
-  ? `"${join(process.resourcesPath, 'maa-resources')}"`
+  ? join(process.resourcesPath, 'maa-resources')
   : resolve(
       fileURLToPath(new URL('.', import.meta.url)),
       '../../src-electron/assets/maa-resources',
