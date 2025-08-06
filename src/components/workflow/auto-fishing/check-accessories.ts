@@ -9,6 +9,7 @@ export const CHECK_ACCESSORIES: Pipeline = {
   clickAddBait: {
     interrupt: ['finishCheckAccessories'],
     next: ['clickUseBait'],
+    post_delay: 500,
     timeout: 2000,
     recognition: 'TemplateMatch',
     roi: [135, 607, 63, 60],
