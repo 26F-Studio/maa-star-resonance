@@ -71,7 +71,10 @@ export class MaaService implements MaaServiceTrait {
         switch (data.action) {
           case 'connect': {
             if (message === 'Controller.Action.Succeeded') {
-              log.info(`Connected to device: ${device.name} (${device.address})`, data);
+              log.info(
+                `Connected to device: ${device.name} (${device.address}), agent: ${AdbController.agent_path()}`,
+                data,
+              );
               this._connecting = false;
               resolve(true);
             } else if (message === 'Controller.Action.Failed') {
