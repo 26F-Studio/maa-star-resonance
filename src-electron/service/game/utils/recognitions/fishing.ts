@@ -38,10 +38,8 @@ export const getBowDirection = async (
     }),
   ]);
 
-  if (bowLeftResult?.detail?.filtered?.length) {
-    return 'left';
-  }
-  if (bowRightResult?.detail?.filtered?.length) {
-    return 'right';
-  }
+  const bowLeftScore = bowLeftResult?.detail?.filtered?.[0]?.score ?? 0;
+  const bowRightScore = bowRightResult?.detail?.filtered?.[0]?.score ?? 0;
+
+  return bowLeftScore > bowRightScore ? 'left' : bowRightScore > bowLeftScore ? 'right' : undefined;
 };

@@ -11,11 +11,13 @@ export const AUTO_FISHING: Workflow = {
       name: 'startFishing',
       icon: 'start',
       data: START_FISHING,
+      ignoreFailure: true,
     },
     {
       name: 'checkAccessories',
       icon: 'checklist',
       data: CHECK_ACCESSORIES,
+      ignoreFailure: true,
     },
     {
       name: 'autoCastingAndLanding',

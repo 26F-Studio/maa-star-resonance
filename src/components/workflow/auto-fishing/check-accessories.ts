@@ -18,6 +18,7 @@ export const CHECK_ACCESSORIES: Pipeline = {
     action: 'Click',
   },
   clickUseBait: {
+    interrupt: ['finishCheckAccessories'],
     next: ['clickAddRod'],
     timeout: 2000,
     recognition: 'OCR',
