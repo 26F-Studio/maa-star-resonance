@@ -3,7 +3,7 @@ import log from 'electron-log';
 import { inject, injectable } from 'inversify';
 
 import { GameService } from 'app/src-electron/service/game';
-import { LOG_PATH, RESOURCES_PATH } from 'app/src-electron/service/maa/constants';
+import { AGENT_PATH, LOG_PATH, RESOURCES_PATH } from 'app/src-electron/service/maa/constants';
 
 import { MaaServiceTrait } from 'src/types/service/maa';
 import { AdbDevice, Pipeline } from 'src/types/service/maa/types';
@@ -54,6 +54,7 @@ export class MaaService implements MaaServiceTrait {
       throw new Error('Invalid device address');
     }
     log.info(`Switching to device: ${device.name} (${device.address})`);
+    log.info(`Using agent path: ${AGENT_PATH}`);
     if (this._adbController) {
       this._adbController.destroy();
     }
@@ -63,6 +64,7 @@ export class MaaService implements MaaServiceTrait {
       device.screencap_methods,
       device.input_methods,
       device.config,
+      AGENT_PATH,
     );
 
     return new Promise((resolve, reject) => {

@@ -9,6 +9,10 @@ export const EMPTY_RECT: api.Rect = {
   height: 0,
 };
 
+export const AGENT_PATH = process.env.PROD
+  ? join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', '@maaxyz', 'maa-node', 'agent')
+  : undefined;
+
 export const LOG_PATH = process.env.PROD
   ? join(process.resourcesPath, 'logs')
   : resolve(fileURLToPath(new URL('.', import.meta.url)), '../..');
