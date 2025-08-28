@@ -9,7 +9,7 @@ import { WindowType } from 'src/types/service/window/types';
 import { i18nSubPath, useService } from 'src/utils/common';
 
 const i18n = i18nSubPath('layouts.headers.MainHeader');
-const {name} = useRoute();
+const { name } = useRoute();
 const windowService = useService(ServiceType.window);
 
 const isAlwaysOnTop = ref(false);

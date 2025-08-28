@@ -86,8 +86,7 @@ export default {
   },
   pages: {
     WorkflowPage: {
-      labels: {
-      },
+      labels: {},
     },
   },
 };
