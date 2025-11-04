@@ -2,42 +2,63 @@
 
 A Star Resonance helper powered by Quasar and MAA frameworks
 
-## Install the dependencies
+This application only works with Android emulators and devices.
+
+## Table of Contents
+
+- [Usage](#usage)
+- [Development Setup](#development-setup)
+
+## Usage
+
+### Auto fishing
+
+This workflow automates the fishing process.
+
+1. Make sure your character is in a fishing spot in the game.
+2. Select your device with the correct port.
+3. Select the "Auto Fishing" workflow.
+4. Set run rounds at the bottom of the workflow info panel.
+5. Click "Run Workflow" to start the auto fishing process.
+
+### Broadcast message
+
+This workflow automates the process of sending messages in specific world channels.
+
+1. Open workflow config drawer by clicking the gear icon on the top right.
+2. Setup begin channel and end channel.
+3. Close the workflow config drawer by clicking the gear icon again.
+4. Set run rounds at the bottom of the workflow info panel.
+5. Click "Run Workflow" to start broadcasting messages.
+
+## Development Setup
+
+### Install the dependencies
 
 ```bash
-yarn
-# or
-npm install
+pnpm install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
 ```bash
-quasar dev
+pnpm run dev
 ```
 
 ### Lint the files
 
 ```bash
-yarn lint
-# or
-npm run lint
+pnpm run lint
 ```
 
 ### Format the files
 
 ```bash
-yarn format
-# or
-npm run format
+pnpm run format
 ```
 
 ### Build the app for production
 
 ```bash
-quasar build
+pnpm run publish
 ```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
