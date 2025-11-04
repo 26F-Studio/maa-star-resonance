@@ -72,7 +72,7 @@ const toggleMaximize = async () => {
         {{ i18n(`routes.${String(name)}`) }}
       </q-toolbar-title>
       <theme-button />
-      <q-btn dense flat icon="menu" round @click="bus.emit('drawer', 'toggle', 'right')" />
+      <q-btn dense flat icon="settings" round @click="bus.emit('drawer', 'toggle', 'right')" />
     </q-toolbar>
   </q-header>
 </template>

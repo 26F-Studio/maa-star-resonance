@@ -30,6 +30,10 @@ export default {
           name: 'Auto Fishing',
           description: 'Automatically fish in the game',
         },
+        broadcast: {
+          name: 'Broadcast',
+          description: 'Broadcast messages to all world channels',
+        },
       },
       pipelines: {
         autoCastingAndLanding: {
@@ -40,12 +44,25 @@ export default {
           name: 'Check Accessories',
           description: 'Ensure all necessary accessories are equipped',
         },
+        openChat: {
+          name: 'Open Chat',
+          description: 'Open the in-game chat window',
+        },
+        pasteAndSendMessage: {
+          name: 'Paste and Send Message',
+          description: 'Paste a message and send it in the chat',
+        },
         startFishing: {
           name: 'Start Fishing',
           description: 'Navigate to the fishing scene',
         },
+        switchChannel: {
+          name: 'Switch Channel',
+          description: 'Switch to the specified world channel',
+        },
       },
       notifications: {
+        gameServiceConfigError: 'Game service configuration error',
         pipelineError: 'Pipeline "{name}" threw an error',
         workflowFailure: 'Workflow "{name}" failed',
         workflowInterrupted: 'Workflow "{name}" was interrupted',
@@ -65,6 +82,14 @@ export default {
           workflow: 'Workflow',
         },
       },
+      RightMainDrawer: {
+        labels: {
+          title: 'Workflow Configs',
+          broadcast: 'Broadcast',
+          beginChannel: 'Begin Channel',
+          endChannel: 'End Channel',
+        }
+      }
     },
     headers: {
       MainHeader: {

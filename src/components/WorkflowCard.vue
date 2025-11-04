@@ -7,9 +7,13 @@ import type { Workflow } from 'components/workflow/types';
 
 import { ServiceType } from 'src/types/service';
 import { i18nSubPath, useService } from 'src/utils/common';
+import { storeToRefs } from 'pinia';
+import { useConfigsStore } from 'stores/configs';
 
 const i18n = i18nSubPath('components.WorkflowCard');
+const { gameServiceConfig } = storeToRefs(useConfigsStore());
 const { notify } = useQuasar();
+const gameService = useService(ServiceType.game);
 const maaService = useService(ServiceType.maa);
 
 const props = withDefaults(
@@ -32,6 +36,14 @@ const stepIndex = ref(-1);
 
 const runWorkflow = async () => {
   if (props.disabled || !selectedWorkflow.value) {
+    return;
+  }
+
+  if (!(await gameService.updateConfig(toRaw(gameServiceConfig.value)))) {
+    notify({
+      type: 'negative',
+      message: i18n('notifications.gameServiceConfigError'),
+    });
     return;
   }
 

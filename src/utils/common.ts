@@ -17,6 +17,19 @@ export const isValidIpPort = (input: string) => {
   return regex.test(input);
 };
 
+export const sanitizeNumberInput = (value: string | number | null, min: number, max: number): number => {
+  if (typeof value === 'string') {
+    value = parseInt(value, 10);
+  }
+  if (value === null || isNaN(value) || value < min) {
+    return min;
+  }
+  if (value > max) {
+    return max;
+  }
+  return value;
+};
+
 export const useService = <T extends ServiceType>(serviceName: T) =>
   new Proxy(
     {},

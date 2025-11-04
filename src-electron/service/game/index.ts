@@ -9,30 +9,43 @@ import {
   stopReelIn,
 } from 'app/src-electron/service/game/utils/actions/fishing';
 import { getScreenshot } from 'app/src-electron/service/game/utils/common';
-
-import { GameServiceTrait } from 'src/types/service/game';
 import {
   checkIfReeling,
   getBowDirection,
 } from 'app/src-electron/service/game/utils/recognitions/fishing';
 import { sleep } from 'src/utils/common';
 import { clickByFlatRect } from 'app/src-electron/service/game/utils/actions/common';
+import { CHANNEL_NUMBER_POSITION_MAP } from 'app/src-electron/service/game/constants';
+
+import { GameServiceTrait } from 'src/types/service/game';
+import { GameServiceConfig } from 'src/types/service/game/types';
 
 @injectable()
 export class GameService implements GameServiceTrait {
+  private _beginChannel = 1;
+  private _currentChannel = 1;
+  private _endChannel = 9999;
   private _currentBowDirection: 'left' | 'right' | undefined;
   private _isReelingIn = false;
   private _lastBowDirectionChangeTime = 0;
 
   constructor() {}
 
-  updateConfig(): boolean {
-    return false;
+  updateConfig(config: GameServiceConfig): boolean {
+    this._beginChannel = config.workflowConfig.broadcast.begin;
+    this._endChannel = config.workflowConfig.broadcast.end;
+    this._currentChannel = this._beginChannel;
+    console.log(`Broadcast channel range updated: ${this._beginChannel}~${this._endChannel}`);
+    return true;
   }
 
   registerToResource(resource: Resource) {
     resource.register_custom_action('actEnsureBait', this._actEnsureBait.bind(this));
     resource.register_custom_action('actEnsureRod', this._actEnsureRod.bind(this));
+    resource.register_custom_action(
+      'actInputChannelNumber',
+      this._actInputChannelNumber.bind(this),
+    );
     resource.register_custom_action('actReelIn', this._actReelIn.bind(this));
   }
 
@@ -65,6 +78,29 @@ export class GameService implements GameServiceTrait {
       return false;
     }
     log.info('Rod is available');
+    return true;
+  }
+
+  private async _actInputChannelNumber(self: CustomActionSelf): Promise<boolean> {
+    log.info(`Inputting channel number ${this._currentChannel}...`);
+    for (const digit of this._currentChannel.toString().split('')) {
+      const digitPosition = CHANNEL_NUMBER_POSITION_MAP[parseInt(digit, 10)];
+      if (!digitPosition) {
+        log.error(`Invalid digit ${digit} for channel number`);
+        return false;
+      }
+      const clickResult = await clickByFlatRect(self.context, digitPosition);
+      if (!clickResult) {
+        log.error(`Failed to click on digit ${digit} for channel number`);
+        return false;
+      }
+    }
+    log.info('Channel number inputted');
+    this._currentChannel = Number(this._currentChannel) + 1;
+    console.log(this._currentChannel, this._endChannel);
+    if (this._currentChannel > this._endChannel) {
+      this._currentChannel = this._beginChannel;
+    }
     return true;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "maa-star-resonance",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A Star Resonance helper powered by Quasar and MAA frameworks",
   "productName": "MAA Star Resonance",
   "author": "ParticleG <particle_g@outlook.com>",
@@ -30,10 +30,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@intlify/unplugin-vue-i18n": "^4.0.0",
+    "@intlify/unplugin-vue-i18n": "^11.0.1",
     "@quasar/app-vite": "^2.4.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^20.19.24",
+    "@vitejs/plugin-vue": "5.0.5",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "autoprefixer": "^10.4.21",
@@ -52,5 +53,10 @@
     "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@vitejs/plugin-vue": "5.0.5"
+    }
   }
 }
