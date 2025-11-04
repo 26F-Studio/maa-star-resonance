@@ -1,13 +1,27 @@
-# MAA Star Resonance (maa-star-resonance)
+<div style="text-align: center">
 
-A Star Resonance helper powered by Quasar and MAA frameworks
+# MAA Star Resonance
 
-This application only works with Android emulators and devices.
+![Typescript](https://img.shields.io/badge/Typescript-8A2BE2?logo=typescript)
+![license](https://img.shields.io/github/license/26F-Studio/maa-star-resonance)
+![activity](https://img.shields.io/github/commit-activity/m/26F-Studio/maa-star-resonance?color=%23ff69b4)
+![stars](https://img.shields.io/github/stars/26F-Studio/maa-star-resonance?style=social)
+
+**A Star Resonance helper powered by Quasar and MAA frameworks**
+
+*This application only works with Android emulators and devices.*
+
+</div>
 
 ## Table of Contents
 
+- [Screenshots](#screenshots)
 - [Usage](#usage)
 - [Development Setup](#development-setup)
+
+## Screenshots
+
+![screenshot](./.github/assets/screenshot.png)
 
 ## Usage
 

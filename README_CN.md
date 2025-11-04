@@ -1,13 +1,27 @@
-# MAA Star Resonance (maa-star-resonance)
+<div style="text-align: center">
 
-一个由 Quasar 和 MAA 框架驱动的星痕共鸣小助手
+# MAA Star Resonance
 
-此应用程序仅适用于安卓模拟器和设备。
+![Typescript](https://img.shields.io/badge/Typescript-8A2BE2?logo=typescript)
+![license](https://img.shields.io/github/license/26F-Studio/maa-star-resonance)
+![activity](https://img.shields.io/github/commit-activity/m/26F-Studio/maa-star-resonance?color=%23ff69b4)
+![stars](https://img.shields.io/github/stars/26F-Studio/maa-star-resonance?style=social)
+
+**一个由 Quasar 和 MAA 框架驱动的星痕共鸣小助手**
+
+*此应用程序仅适用于安卓模拟器和设备。*
+
+</div>
 
 ## 目录
 
+- [截图](#截图)
 - [使用方法](#使用方法)
 - [开发设置](#开发设置)
+
+## 截图
+
+![screenshot](./.github/assets/screenshot.png)
 
 ## 使用方法
 
